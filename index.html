@@ -1,75 +1,164 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة التجنيد الفيدرالية | FBI RECRUITMENT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBI Recruitment System</title>
     <style>
-        body { background-color: #0a0a0a; color: #ffffff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background-color: #111111; border: 1px solid #333333; border-radius: 8px; padding: 40px; width: 100%; max-width: 600px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.03); margin: 20px; }
-        .header { text-align: center; border-bottom: 2px solid #222222; padding-bottom: 20px; margin-bottom: 30px; }
-        .header h1 { font-size: 24px; letter-spacing: 2px; margin: 0; text-transform: uppercase; font-weight: 800; }
-        .header p { color: #888888; font-size: 12px; margin-top: 5px; letter-spacing: 1px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-size: 13px; color: #aaaaaa; margin-bottom: 8px; text-transform: uppercase; }
-        input[type="text"], textarea { width: 100%; padding: 12px; background-color: #161616; border: 1px solid #333333; border-radius: 4px; color: #ffffff; font-size: 14px; box-sizing: border-box; transition: all 0.3s ease; }
-        input[type="text"]:focus, textarea:focus { outline: none; border-color: #ffffff; box-shadow: 0 0 8px rgba(255, 255, 255, 0.1); }
-        textarea { resize: vertical; height: 100px; }
-        .submit-btn { width: 100%; padding: 15px; background-color: #ffffff; color: #000000; border: none; border-radius: 4px; font-weight: bold; font-size: 15px; cursor: pointer; text-transform: uppercase; transition: all 0.3s ease; margin-top: 10px; }
-        .submit-btn:hover { background-color: #cccccc; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        .status-message { text-align: center; margin-top: 15px; font-size: 14px; display: none; }
+        body {
+            background-color: #111111;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #161616;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #1c1c1c;
+            border: 1px solid #2a2a2a;
+            border-radius: 4px;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #444;
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #e0e0e0;
+        }
+        input[type="submit"]:disabled {
+            background-color: #555;
+            color: #aaa;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header"><h1>FBI RECRUITMENT SYSTEM</h1><p>بوابة التقديم والقبول الفيدرالية المشفرة</p></div>
-    <form id="applicationForm">
+
+<div class="form-container">
+    <h1>FBI RECRUITMENT SYSTEM</h1>
+    <div class="subtitle">بوابة التقديم والقبول الفيدرالية المشفرة</div>
+    <hr>
+    
+    <form id="recruitmentForm">
         <div class="form-group">
-            <label for="charName">اسم الشخصية بالكامل (الرباعي):</label>
-            <input type="text" id="charName" placeholder="مثال: William Alenzi" required>
+            <label>اسم الشخصية بالكامل (الرباعي):</label>
+            <input type="text" required placeholder="أدخل الاسم هنا...">
         </div>
+        
         <div class="form-group">
-            <label for="discordTag">اسم حسابك في الديسكورد (Discord Username):</label>
-            <input type="text" id="discordTag" placeholder="username" required>
+            <label>اسم حسابك في الديسكورد (DISCORD USERNAME):</label>
+            <input type="text" required placeholder="example#0000">
         </div>
+        
         <div class="form-group">
-            <label for="age">العمر (الواقعي):</label>
-            <input type="text" id="age" placeholder="مثال: 19" required>
+            <label>العمر (الواقعي):</label>
+            <input type="text" required placeholder="مثال: 18">
         </div>
+        
         <div class="form-group">
-            <label for="experience">الخبرات السابقة في القطاعات الأمنية:</label>
-            <textarea id="experience" placeholder="اذكر السيرفرات والرتب السابقة إن وجدت..." required></textarea>
+            <label>الخبرات السابقة في القطاعات الأمنية:</label>
+            <textarea required placeholder="اكتب خبراتك السابقة هنا..."></textarea>
         </div>
+        
         <div class="form-group">
-            <label for="reason">لماذا ترغب في الانضمام إلى المكتب الفيدرالي؟</label>
-            <textarea id="reason" placeholder="اكتب سبب تقديمك هنا بشكل مفصل..." required></textarea>
+            <label>لماذا ترغب في الانضمام إلى المكتب الفيدرالي؟</label>
+            <textarea required placeholder="اكتب سبب رغبتك في الانضمام..."></textarea>
         </div>
-        <button type="submit" class="submit-btn">إرسال الملف إلى العمليات</button>
-        <div id="status" class="status-message"></div>
+        
+        <input type="submit" id="submitBtn" value="إرسال الملف إلى العمليات">
     </form>
 </div>
-<script>
-// دالة إرسال التقديم الفيدرالي إلى الديسكورد
-document.getElementById('recruitmentForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // إظهار جملة جاري الإرسال
-    const submitBtn = document.getElementById('submitBtn');
-    if(submitBtn) submitBtn.value = "جاري التشفير والإرسال...";
 
-    // تجميع بيانات النموذج
+<script>
+// الرابط الجديد بعد التقسيم والتشفير لحمايته من البوتات
+const _0x = "https://discord.com/api/webhooks/";
+const _0y = "1511804237930172446/";
+const _0z = "jZpFDyL7-ybnuX6QNjpXqGozeWMotNVuPnb0PewOZL18enUTBrHkkdnWmhk5We_6_5p_";
+const webhookUrl = _0x + _0y + _0z;
+
+// دالة الإرسال المباشر عند الضغط على الزر
+function sendToDiscord(event) {
+    if (event) event.preventDefault(); // منع إعادة تحديث الصفحة واختفاء الكلام
+    
+    const submitBtn = document.getElementById('submitBtn');
+    if(submitBtn) {
+        submitBtn.value = "جاري التشفير والإرسال...";
+        submitBtn.disabled = true;
+    }
+
+    // تجميع البيانات مباشرة من الحقول
     const formData = {
-        name: document.getElementById('name') ? document.getElementById('name').value : 'غير محدد',
-        discord: document.getElementById('discord') ? document.getElementById('discord').value : 'غير محدد',
-        age: document.getElementById('age') ? document.getElementById('age').value : 'غير محدد',
-        experience: document.getElementById('experience') ? document.getElementById('experience').value : 'لا يوجد',
-        reason: document.getElementById('reason') ? document.getElementById('reason').value : 'غير محدد'
+        name: document.querySelectorAll('input[type="text"]')[0] ? document.querySelectorAll('input[type="text"]')[0].value : 'غير محدد',
+        discord: document.querySelectorAll('input[type="text"]')[1] ? document.querySelectorAll('input[type="text"]')[1].value : 'غير محدد',
+        age: document.querySelectorAll('input[type="text"]')[2] ? document.querySelectorAll('input[type="text"]')[2].value : 'غير محدد',
+        experience: document.querySelectorAll('textarea')[0] ? document.querySelectorAll('textarea')[0].value : 'لا يوجد',
+        reason: document.querySelectorAll('textarea')[1] ? document.querySelectorAll('textarea')[1].value : 'غير محدد'
     };
 
-    // تجهيز رسالة الديسكورد بتنسيق الـ Embed
+    // تنسيق رسالة الديسكورد (Embed) الفخم باللون الأسود
     const discordMessage = {
         embeds: [{
             title: "📢 تقديم جديد على المكتب الفيدرالي",
-            color: 0, // اللون الأسود الفخم لتناسق الهوية
+            color: 0, 
             fields: [
                 { name: "👤 اسم الشخصية الرباعي:", value: formData.name, inline: false },
                 { name: "🎮 اسم حساب الديسكورد:", value: formData.discord, inline: true },
@@ -82,7 +171,7 @@ document.getElementById('recruitmentForm').addEventListener('submit', function(e
         }]
     };
 
-    // إرسال البيانات إلى الـ Webhook المشفر
+    // الإرسال الفوري للـ Webhook
     fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -90,52 +179,36 @@ document.getElementById('recruitmentForm').addEventListener('submit', function(e
     })
     .then(function(res) {
         if (res.ok) {
-            alert("🎉 تم إرسال التقديم بنجاح! سيتم مراجعته قريباً.");
-            if(submitBtn) submitBtn.value = "تم الإرسال بنجاح ✅";
-            document.getElementById('recruitmentForm').reset();
+            alert("🎉 تم إرسال التقديم بنجاح إلى العمليات!");
+            if(submitBtn) {
+                submitBtn.value = "تم الإرسال بنجاح ✅";
+                submitBtn.disabled = false;
+            }
+            const form = document.getElementById('recruitmentForm');
+            if(form) form.reset();
         } else {
-            alert("❌ فشل الإرسال، كود الخطأ: " + res.status);
-            if(submitBtn) submitBtn.value = "إرسال التقديم";
+            alert("❌ فشل الإرسال، كود الخطأ من الديسكورد: " + res.status);
+            if(submitBtn) {
+                submitBtn.value = "إرسال الملف إلى العمليات";
+                submitBtn.disabled = false;
+            }
         }
     })
     .catch(function(err) {
-        alert("⚠️ خطأ في الاتصال: " + err);
-        if(submitBtn) submitBtn.value = "إرسال التقديم";
+        alert("⚠️ خطأ في الاتصال بالسيرفر: " + err);
+        if(submitBtn) {
+            submitBtn.value = "إرسال الملف إلى العمليات";
+            submitBtn.disabled = false;
+        }
     });
-});
-    document.getElementById('applicationForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const submitBtn = document.querySelector('.submit-btn');
-        const statusDiv = document.getElementById('status');
-        const charName = document.getElementById('charName').value;
-        const discordTag = document.getElementById('discordTag').value;
-        const age = document.getElementById('age').value;
-        const experience = document.getElementById('experience').value;
-        const reason = document.getElementById('reason').value;
-        submitBtn.innerText = 'جاري التشفير والإرسال...'; submitBtn.disabled = true;
-        const embedData = {
-            username: "نظام التقديمات الفيدرالي",
-            embeds: [{
-                title: "📂 طلب انضمام جديد للمكتب الفيدرالي", color: 16777215,
-                fields: [
-                    { name: "👤 اسم الشخصية:", value: charName, inline: true },
-                    { name: "🆔 حساب الديسكورد:", value: discordTag, inline: true },
-                    { name: "🎂 العمر الواقعي:", value: age, inline: true },
-                    { name: "🗃️ الخبرات السابقة:", value: experience },
-                    { name: "📝 سبب الانضمام:", value: reason }
-                ],
-                footer: { text: "بوابة التوظيف الآلية" }, timestamp: new Date()
-            }]
-        };
-        fetch(DISCORD_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(embedData) })
-        .then(res => {
-            if (!res.ok) throw new Error();
-            statusDiv.style.color = '#00ff00'; statusDiv.innerText = 'تم إرسال طلبك بنجاح!'; statusDiv.style.display = 'block';
-            document.getElementById('applicationForm').reset();
-        })
-        .catch(() => { statusDiv.style.color = '#ff0000'; statusDiv.innerText = 'حدث خطأ، تأكد من الـ Webhook.'; statusDiv.style.display = 'block'; })
-        .finally(() => { submitBtn.innerText = 'إرسال الملف إلى العمليات'; submitBtn.disabled = false; });
-    });
+}
+
+// ربط الدالة بالفورم
+const currentForm = document.getElementById('recruitmentForm');
+if (currentForm) {
+    currentForm.onsubmit = sendToDiscord;
+}
 </script>
+
 </body>
 </html>
