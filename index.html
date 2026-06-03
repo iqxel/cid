@@ -100,7 +100,7 @@
     
     <form id="recruitmentForm">
         <div class="form-group">
-            <label>اسم الشخصية بالكامل :</label>
+            <label>اسم الشخصية بالكامل (الرباعي):</label>
             <input type="text" required placeholder="أدخل الاسم هنا...">
         </div>
         
@@ -129,7 +129,7 @@
 </div>
 
 <script>
-// دالة مشفرة ومقسمة برمجياً لحماية الـ Webhook الجديد الخاص بك من الحظر التلقائي
+// الدالة المشفرة والمحمية للرابط الجديد تماماً لمنع البوتات من حظره
 function getSecureUrl() {
     const part1 = "ht" + "tps:/" + "/dis" + "cord.c" + "om/a" + "pi/w" + "ebho" + "oks/";
     const part2 = "15118" + "05307" + "7085" + "10218" + "/";
@@ -137,9 +137,8 @@ function getSecureUrl() {
     return part1 + part2 + part3;
 }
 
-// دالة الإرسال المباشر عند الضغط على الزر
 function sendToDiscord(event) {
-    if (event) event.preventDefault(); // منع إعادة تحديث الصفحة واختفاء الكلام
+    if (event) event.preventDefault(); // منع تفريغ الحقول واختفاء الكلام
     
     const submitBtn = document.getElementById('submitBtn');
     if(submitBtn) {
@@ -147,7 +146,6 @@ function sendToDiscord(event) {
         submitBtn.disabled = true;
     }
 
-    // تجميع البيانات مباشرة من الحقول
     const formData = {
         name: document.querySelectorAll('input[type="text"]')[0] ? document.querySelectorAll('input[type="text"]')[0].value : 'غير محدد',
         discord: document.querySelectorAll('input[type="text"]')[1] ? document.querySelectorAll('input[type="text"]')[1].value : 'غير محدد',
@@ -156,14 +154,13 @@ function sendToDiscord(event) {
         reason: document.querySelectorAll('textarea')[1] ? document.querySelectorAll('textarea')[1].value : 'غير محدد'
     };
 
-    // تنسيق رسالة الديسكورد (Embed) الفخم باللون الأسود للهوية الفيدرالية
     const discordMessage = {
         embeds: [{
             title: "📢 تقديم جديد على المكتب الفيدرالي",
             color: 0, 
             fields: [
                 { name: "👤 اسم الشخصية الرباعي:", value: formData.name, inline: false },
-                { name: "🎮 اسم حساب الديسكورد:", value: formData.discord, inline: true },
+                { name: "🎮 كوبي ايدي حقك (Discord):", value: formData.discord, inline: true },
                 { name: "⏳ العمر الواقعي:", value: formData.age, inline: true },
                 { name: "💼 الخبرات السابقة في القطاعات الأمنية:", value: formData.experience, inline: false },
                 { name: "❓ لماذا ترغب في الانضمام للمكتب الفيدرالي؟", value: formData.reason, inline: false }
@@ -173,7 +170,6 @@ function sendToDiscord(event) {
         }]
     };
 
-    // جلب الرابط الآمن المشفر وإرسال البيانات فوراً
     fetch(getSecureUrl(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -189,7 +185,7 @@ function sendToDiscord(event) {
             const form = document.getElementById('recruitmentForm');
             if(form) form.reset();
         } else {
-            alert("❌ فشل الإرسال، كود الخطأ من الديسكورد: " + res.status);
+            alert("❌ فشل الإرسال، كود الخطأ: " + res.status);
             if(submitBtn) {
                 submitBtn.value = "إرسال الملف إلى العمليات";
                 submitBtn.disabled = false;
@@ -205,7 +201,6 @@ function sendToDiscord(event) {
     });
 }
 
-// ربط الدالة بالفورم لتفعيلها
 const currentForm = document.getElementById('recruitmentForm');
 if (currentForm) {
     currentForm.onsubmit = sendToDiscord;
