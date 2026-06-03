@@ -48,21 +48,60 @@
     </form>
 </div>
 <script>
-// Verification Code
-fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content: "FBI Webhook Test Successful!" })
-})
-.then(function(res) {
-    if (res.ok) {
-        alert("SUCCESS: Webhook is working 100%!");
-    } else {
-        alert("ERROR: Status code " + res.status);
-    }
-})
-.catch(function(err) {
-    alert("FAILED: " + err);
+// دالة إرسال التقديم الفيدرالي إلى الديسكورد
+document.getElementById('recruitmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // إظهار جملة جاري الإرسال
+    const submitBtn = document.getElementById('submitBtn');
+    if(submitBtn) submitBtn.value = "جاري التشفير والإرسال...";
+
+    // تجميع بيانات النموذج
+    const formData = {
+        name: document.getElementById('name') ? document.getElementById('name').value : 'غير محدد',
+        discord: document.getElementById('discord') ? document.getElementById('discord').value : 'غير محدد',
+        age: document.getElementById('age') ? document.getElementById('age').value : 'غير محدد',
+        experience: document.getElementById('experience') ? document.getElementById('experience').value : 'لا يوجد',
+        reason: document.getElementById('reason') ? document.getElementById('reason').value : 'غير محدد'
+    };
+
+    // تجهيز رسالة الديسكورد بتنسيق الـ Embed
+    const discordMessage = {
+        embeds: [{
+            title: "📢 تقديم جديد على المكتب الفيدرالي",
+            color: 0, // اللون الأسود الفخم لتناسق الهوية
+            fields: [
+                { name: "👤 اسم الشخصية الرباعي:", value: formData.name, inline: false },
+                { name: "🎮 اسم حساب الديسكورد:", value: formData.discord, inline: true },
+                { name: "⏳ العمر الواقعي:", value: formData.age, inline: true },
+                { name: "💼 الخبرات السابقة في القطاعات الأمنية:", value: formData.experience, inline: false },
+                { name: "❓ لماذا ترغب في الانضمام للمكتب الفيدرالي؟", value: formData.reason, inline: false }
+            ],
+            footer: { text: "بوابة القبول الفيدرالية المشفرة • iQxel System" },
+            timestamp: new Date()
+        }]
+    };
+
+    // إرسال البيانات إلى الـ Webhook المشفر
+    fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(discordMessage)
+    })
+    .then(function(res) {
+        if (res.ok) {
+            alert("🎉 تم إرسال التقديم بنجاح! سيتم مراجعته قريباً.");
+            if(submitBtn) submitBtn.value = "تم الإرسال بنجاح ✅";
+            document.getElementById('recruitmentForm').reset();
+        } else {
+            alert("❌ فشل الإرسال، كود الخطأ: " + res.status);
+            if(submitBtn) submitBtn.value = "إرسال التقديم";
+        }
+    })
+    .catch(function(err) {
+        alert("⚠️ خطأ في الاتصال: " + err);
+        if(submitBtn) submitBtn.value = "إرسال التقديم";
+    });
 });
     document.getElementById('applicationForm').addEventListener('submit', function(e) {
         e.preventDefault();
